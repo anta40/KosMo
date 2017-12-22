@@ -15,6 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 import id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.adapter.KostAdapter;
@@ -46,8 +52,46 @@ public class kos_putri extends Fragment {
         mAdapter = new KostAdapter(mList);
         recyclerView.setAdapter(mAdapter);
 
-        fillData();
+        getDataFromFirebase();
+        //fillData();
         return view;
+    }
+
+    private void getDataFromFirebase(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("kos_putri");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot ds) {
+                Resources resources = getResources();
+                TypedArray a = resources.obtainTypedArray(R.array.places_picture);
+                Drawable[] arFoto = new Drawable[a.length()];
+                for (int i = 0; i < arFoto.length; i++) {
+                    BitmapDrawable bd = (BitmapDrawable) a.getDrawable(i);
+                    RoundedBitmapDrawable rbd =
+                            RoundedBitmapDrawableFactory.create(getResources(), bd.getBitmap());
+                    rbd.setCircular(true);
+                    arFoto[i] = rbd;
+                }
+                a.recycle();
+
+                for (DataSnapshot data:ds.getChildren()){
+                    String lokasi = data.child("lokasi").getValue().toString();
+                    String deskripsi = data.child("deskripsi").getValue().toString();
+                    String nama = data.child("nama").getValue().toString();
+                    String kamar = data.child("jumlah_kamar").getValue().toString();
+
+                    mList.add(new Kost(nama, deskripsi, lokasi, arFoto[1]));
+                }
+
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private void fillData() {
