@@ -3,6 +3,8 @@ package id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet;
 
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +66,8 @@ public class kos_putri extends Fragment {
             @Override
             public void onDataChange(DataSnapshot ds) {
                 Resources resources = getResources();
+
+                /*
                 TypedArray a = resources.obtainTypedArray(R.array.places_picture);
                 Drawable[] arFoto = new Drawable[a.length()];
                 for (int i = 0; i < arFoto.length; i++) {
@@ -73,14 +78,23 @@ public class kos_putri extends Fragment {
                     arFoto[i] = rbd;
                 }
                 a.recycle();
+                */
+
+                Drawable[] arFoto = new Drawable[(int) ds.getChildrenCount()];
+                int x = 0;
 
                 for (DataSnapshot data:ds.getChildren()){
                     String lokasi = data.child("lokasi").getValue().toString();
                     String deskripsi = data.child("deskripsi").getValue().toString();
                     String nama = data.child("nama").getValue().toString();
                     String kamar = data.child("jumlah_kamar").getValue().toString();
-
-                    mList.add(new Kost(nama, deskripsi, lokasi, arFoto[1]));
+                    String gambar = data.child("gambar").getValue().toString();
+                    byte[] bbb = Base64.decode(gambar, Base64.DEFAULT);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(bbb, 0, bbb.length);
+                    Drawable d = new BitmapDrawable(getContext().getResources(), decodedByte);
+                    arFoto[x] = d;
+                    mList.add(new Kost(nama, deskripsi, lokasi, arFoto[x]));
+                    ++x;
                 }
 
                 mAdapter.notifyDataSetChanged();
