@@ -19,6 +19,7 @@ import id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.kost.Kost;
 public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ViewHolder> {
 
     ArrayList<Kost> kostList;
+    static ClickListener clickListener;
 
     public KostAdapter(ArrayList<Kost> kostList)
     {
@@ -49,7 +50,11 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ViewHolder> {
         return 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public void setOnItemClickListener(ClickListener clickListener) {
+        KostAdapter.clickListener = clickListener;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener  {
 
         ImageView ivFoto;
         TextView tvJudul;
@@ -63,6 +68,20 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ViewHolder> {
             tvJudul = (TextView) itemView.findViewById(R.id.textViewJudul);
             tvDeskripsi = (TextView) itemView.findViewById(R.id.textViewDeskripsi);
             tvLokasi = (TextView) itemView.findViewById(R.id.textViewLokasi);
+
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            clickListener.onItemClick(getAdapterPosition(), view);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            clickListener.onItemLongClick(getAdapterPosition(), view);
+            return false;
         }
     }
 

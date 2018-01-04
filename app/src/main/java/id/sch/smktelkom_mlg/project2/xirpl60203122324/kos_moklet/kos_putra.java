@@ -1,12 +1,14 @@
 package id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet;
 
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -32,6 +34,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
+import id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.adapter.ClickListener;
 import id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.adapter.KostAdapter;
 import id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.kost.Kost;
 
@@ -59,6 +62,23 @@ public class kos_putra extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new KostAdapter(mList);
+
+        mAdapter.setOnItemClickListener(new ClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Kost k = mList.get(position);
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:"+ Uri.encode(k.deskripsi)));
+
+                callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(callIntent);
+            }
+
+            @Override
+            public void onItemLongClick(int position, View v) {
+             }
+        });
+
         recyclerView.setAdapter(mAdapter);
 
         //fillData();
