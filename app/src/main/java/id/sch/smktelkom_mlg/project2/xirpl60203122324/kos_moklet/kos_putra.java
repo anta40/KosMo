@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.adapter.ClickListener;
@@ -67,11 +68,17 @@ public class kos_putra extends Fragment {
             @Override
             public void onItemClick(int position, View v) {
                 Kost k = mList.get(position);
-                Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                callIntent.setData(Uri.parse("tel:"+ Uri.encode(k.deskripsi)));
+                Bundle bnd = new Bundle();
+                bnd.putString("detail_nama", k.judul);
+                bnd.putString("detail_deskripsi", k.deskripsi);
+                bnd.putString("detail_lokasi", k.lokasi);
+                byte[] bbb = convertDrawtableToByteArray(k.foto);
+                bnd.putByteArray("detail_gambar", bbb);
 
-                callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(callIntent);
+                Intent iii = new Intent(getActivity(), DetailKosActivity.class);
+                iii.putExtra("detail_kos", bnd);
+
+                startActivity(iii);
             }
 
             @Override
@@ -165,6 +172,14 @@ public class kos_putra extends Fragment {
             mList.add(new Kost(arJudul[i], arDeskripsi[i], arLokasi[i], arFoto[i]));
         }
         mAdapter.notifyDataSetChanged();
+    }
+
+    private byte[] convertDrawtableToByteArray(Drawable d){
+        Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] result = stream.toByteArray();
+        return result;
     }
 }
 
