@@ -9,6 +9,13 @@
     android:paddingLeft="40dp"
     android:paddingTop="16dp">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/a" />
+
     <TextView
         android:id="@+id/textViewJudul"
         android:layout_width="match_parent"
@@ -16,11 +23,14 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
         android:ellipsize="end"
         android:maxLines="1"
         android:paddingLeft="15dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="#FFFFFF"
-        tools:text="Judul" />
+         />
+
 
 </RelativeLayout>

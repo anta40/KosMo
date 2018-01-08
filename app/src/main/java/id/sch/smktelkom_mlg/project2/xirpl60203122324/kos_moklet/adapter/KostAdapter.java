@@ -38,6 +38,7 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         Kost kost = kostList.get(position);
         holder.tvJudul.setText(kost.judul);
+        holder.ivFoto.setImageDrawable(kost.foto);
     }
 
     @Override
@@ -54,11 +55,13 @@ public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener  {
 
         TextView tvJudul;
+        ImageView ivFoto;
 
         public ViewHolder(View itemView)
         {
             super(itemView);
             tvJudul = (TextView) itemView.findViewById(R.id.textViewJudul);
+            ivFoto = (ImageView) itemView.findViewById(R.id.imageView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }
