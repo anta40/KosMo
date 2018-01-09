@@ -38,7 +38,7 @@ public class DetailKosActivity extends AppCompatActivity {
         detail_nama.setText(bnd.getString("detail_nama"));
         detail_deskripsi.setText("No telp: "+bnd.getString("detail_deskripsi"));
         detail_lokasi.setText(bnd.getString("detail_lokasi"));
-        detail_kamar.setText("Jumlah kamar: "+bnd.getString("defail_kamar"));
+        detail_kamar.setText("Jumlah kamar: "+bnd.getString("detail_kamar"));
 
         Bitmap bm = BitmapFactory.decodeByteArray(bbb, 0, bbb.length);
         detail_gambar.setImageBitmap(bm);
