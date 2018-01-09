@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         }
         else {
             tx.replace(R.id.main,
-                    Fragment.instantiate(MainActivity.this, "id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.kos_putra"));
+                    Fragment.instantiate(MainActivity.this, "id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.Dashboard"));
             tx.addToBackStack(null);
             tx.commit();
         }
@@ -127,7 +127,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_kos_putra){
+        if (id == R.id.nav_dashboard){
+            FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+            tx.replace(R.id.main,
+                    Fragment.instantiate(MainActivity.this, "id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.Dashboard"));
+            tx.addToBackStack(null);
+            tx.commit();
+            //   tx.addToBackStack(null);
+        }
+
+        else if (id == R.id.nav_kos_putra){
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
             tx.replace(R.id.main,
                     Fragment.instantiate(MainActivity.this, "id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.kos_putra"));

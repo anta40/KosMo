@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
@@ -34,6 +35,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.adapter.ClickListener;
+import id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.adapter.ImageAdapter;
 import id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.adapter.KostAdapter;
 import id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.kost.Kost;
 
@@ -82,7 +84,7 @@ public class kos_putra extends Fragment {
 
             @Override
             public void onItemLongClick(int position, View v) {
-             }
+            }
         });
 
         recyclerView.setAdapter(mAdapter);
@@ -93,17 +95,14 @@ public class kos_putra extends Fragment {
 
     private void getDataFromFirebase(){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("kos_putra");
-
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot ds) {
                 Resources resources = getResources();
-                TypedArray a = resources.obtainTypedArray(R.array.places_picture);
                 Drawable[] arFoto = new Drawable[(int) ds.getChildrenCount()];
                 int x = 0;
 
                 for (DataSnapshot data:ds.getChildren()){
-
                     String lokasi = data.child("lokasi").getValue().toString();
                     String deskripsi = data.child("deskripsi").getValue().toString();
                     String nama = data.child("nama").getValue().toString();
@@ -135,5 +134,6 @@ public class kos_putra extends Fragment {
         byte[] result = stream.toByteArray();
         return result;
     }
+
 }
 
