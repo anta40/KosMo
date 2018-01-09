@@ -33,6 +33,15 @@
         android:paddingTop="10px"/>
 
     <TextView
+        android:id="@+id/detail_kamar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:clickable="true"
+        android:paddingTop="10px"/>
+
+    <TextView
         android:id="@+id/detail_lokasi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -17,6 +17,7 @@ public class DetailKosActivity extends AppCompatActivity {
     TextView detail_nama;
     TextView detail_deskripsi;
     TextView detail_lokasi;
+    TextView detail_kamar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +33,14 @@ public class DetailKosActivity extends AppCompatActivity {
         detail_nama = (TextView) findViewById(R.id.detail_nama);
         detail_deskripsi = (TextView) findViewById(R.id.detail_deskripsi);
         detail_lokasi = (TextView) findViewById(R.id.detail_lokasi);
+        detail_kamar = (TextView) findViewById(R.id.detail_kamar);
 
         detail_nama.setText(bnd.getString("detail_nama"));
         detail_deskripsi.setText("No telp: "+bnd.getString("detail_deskripsi"));
         detail_lokasi.setText(bnd.getString("detail_lokasi"));
+        detail_kamar.setText("Jumlah kamar: "+bnd.getString("defail_kamar"));
 
         Bitmap bm = BitmapFactory.decodeByteArray(bbb, 0, bbb.length);
-       // DisplayMetrics dm = new DisplayMetrics();
-       // getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        //detail_gambar.setMinimumHeight(dm.heightPixels);
-        //detail_gambar.setMinimumWidth(dm.widthPixels);
         detail_gambar.setImageBitmap(bm);
 
         detail_deskripsi.setOnClickListener(new View.OnClickListener() {

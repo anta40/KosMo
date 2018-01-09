@@ -29,8 +29,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -72,6 +70,7 @@ public class kos_putra extends Fragment {
                 bnd.putString("detail_nama", k.judul);
                 bnd.putString("detail_deskripsi", k.deskripsi);
                 bnd.putString("detail_lokasi", k.lokasi);
+                bnd.putString("detail_kamar", k.kamar);
                 byte[] bbb = convertDrawtableToByteArray(k.foto);
                 bnd.putByteArray("detail_gambar", bbb);
 
@@ -88,40 +87,18 @@ public class kos_putra extends Fragment {
 
         recyclerView.setAdapter(mAdapter);
 
-        //fillData();
         getDataFromFirebase();
         return view;
     }
 
     private void getDataFromFirebase(){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("kos_putra");
-        //StorageReference storageRef = storage.getReference();
-       // StorageReference sref = FirebaseStorage.getInstance().getReference();
-        ////StorageReference imgref = sref.getReferenceFromUrl("gs://bucket/images/stars.jpg");
-        //StorageReference imgref = FirebaseStorage.getInstance().getReferenceFromUrl("gs://kosmo-5684f.appspot.com/kosputra1.jpg");
-
-//        final StorageReference logoRef = sref.child("kos_putra/kosputra1.jpg");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot ds) {
                 Resources resources = getResources();
                 TypedArray a = resources.obtainTypedArray(R.array.places_picture);
-                //Drawable[] arFoto = new Drawable[a.length()];
-                //final Drawable[] arFoto = new Drawable[1];
-
-              /*
-                for (int i = 0; i < arFoto.length; i++) {
-                    BitmapDrawable bd = (BitmapDrawable) a.getDrawable(i);
-                    RoundedBitmapDrawable rbd =
-                            RoundedBitmapDrawableFactory.create(getResources(), bd.getBitmap());
-                    rbd.setCircular(true);
-                    arFoto[i] = rbd;
-                }
-
-                a.recycle();
-                */
-
                 Drawable[] arFoto = new Drawable[(int) ds.getChildrenCount()];
                 int x = 0;
 
@@ -136,7 +113,7 @@ public class kos_putra extends Fragment {
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(bbb, 0, bbb.length);
                     Drawable d = new BitmapDrawable(getContext().getResources(), decodedByte);
                     arFoto[x] = d;
-                    mList.add(new Kost(nama, deskripsi, lokasi, arFoto[x]));
+                    mList.add(new Kost(nama, deskripsi, kamar, lokasi, arFoto[x]));
                     ++x;
                 }
 
@@ -149,29 +126,6 @@ public class kos_putra extends Fragment {
             }
         });
 
-    }
-
-
-    private void fillData() {
-        Resources resources = getResources();
-        String[] arJudul = resources.getStringArray(R.array.places);
-        String[] arDeskripsi = resources.getStringArray(R.array.place_desc);
-        String[] arLokasi = resources.getStringArray(R.array.place_locations);
-        TypedArray a = resources.obtainTypedArray(R.array.places_picture);
-        Drawable[] arFoto = new Drawable[a.length()];
-        for (int i = 0; i < arFoto.length; i++) {
-            BitmapDrawable bd = (BitmapDrawable) a.getDrawable(i);
-            RoundedBitmapDrawable rbd =
-                    RoundedBitmapDrawableFactory.create(getResources(), bd.getBitmap());
-            rbd.setCircular(true);
-            arFoto[i] = rbd;
-        }
-        a.recycle();
-
-        for (int i = 0; i < arJudul.length; i++) {
-            mList.add(new Kost(arJudul[i], arDeskripsi[i], arLokasi[i], arFoto[i]));
-        }
-        mAdapter.notifyDataSetChanged();
     }
 
     private byte[] convertDrawtableToByteArray(Drawable d){

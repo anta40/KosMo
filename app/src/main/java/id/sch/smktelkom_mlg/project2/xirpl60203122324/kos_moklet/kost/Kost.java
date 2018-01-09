@@ -11,12 +11,14 @@ public class Kost {
     public String deskripsi;
     public String lokasi;
     public Drawable foto;
+    public String kamar;
 
-    public Kost(String judul, String deskripsi, String lokasi, Drawable foto)
+    public Kost(String judul, String deskripsi, String kamar, String lokasi, Drawable foto)
     {
         this.judul = judul;
         this.deskripsi = deskripsi;
         this.lokasi = lokasi;
+        this.kamar = kamar;
         this.foto = foto;
     }
 }
