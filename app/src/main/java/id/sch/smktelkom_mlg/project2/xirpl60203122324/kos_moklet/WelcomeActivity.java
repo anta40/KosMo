@@ -77,8 +77,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-        //btnSkip = (Button) findViewById(R.id.btn_skip);
-        //btnNext = (Button) findViewById(R.id.btn_next);
+        btnSkip = (Button) findViewById(R.id.btn_skip);
+        btnNext = (Button) findViewById(R.id.btn_next);
 
 
         // layouts of all welcome sliders
@@ -99,7 +99,7 @@ public class WelcomeActivity extends AppCompatActivity {
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
-        /*
+
         btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +120,7 @@ public class WelcomeActivity extends AppCompatActivity {
                     launchHomeScreen();
                 }
             }
-        });*/
+        });
     }
 
     private void addBottomDots(int currentPage) {
