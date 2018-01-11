@@ -93,7 +93,7 @@ public class Dashboard extends Fragment {
                     // move to next screen
                     viewPager.setCurrentItem(current);
                 } else {
-                   // launchHomeScreen();
+                    //launchHomeScreen();
                 }
             }
         });
