@@ -2,11 +2,10 @@ package id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,26 +13,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Context mContext;
-
     private static final String TAG = MainActivity.class.getSimpleName();
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +60,7 @@ public class MainActivity extends AppCompatActivity
         }
         else {
             tx.replace(R.id.main,
-                    Fragment.instantiate(MainActivity.this, "id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.Dashboard"));
+                    Fragment.instantiate(MainActivity.this, "id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.home"));
             tx.addToBackStack(null);
             tx.commit();
         }
@@ -127,30 +114,35 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_dashboard){
-            FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-            tx.replace(R.id.main,
-                    Fragment.instantiate(MainActivity.this, "id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.Dashboard"));
-            tx.addToBackStack(null);
-            tx.commit();
-            //   tx.addToBackStack(null);
-        }
 
-        else if (id == R.id.nav_kos_putra){
+        if (id == R.id.nav_kos_putra) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
             tx.replace(R.id.main,
                     Fragment.instantiate(MainActivity.this, "id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.kos_putra"));
             tx.addToBackStack(null);
             tx.commit();
             //   tx.addToBackStack(null);
-        }
-        else if (id == R.id.nav_kos_putri){
+        } else if (id == R.id.nav_kos_putri) {
             FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
             tx.replace(R.id.main,
                     Fragment.instantiate(MainActivity.this, "id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.kos_putri"));
             tx.addToBackStack(null);
             tx.commit();
             //  tx.addToBackStack(null);
+        } else if (id == R.id.nav_home) {
+            FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+            tx.replace(R.id.main,
+                    Fragment.instantiate(MainActivity.this, "id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.home"));
+            tx.addToBackStack(null);
+            tx.commit();
+            //   tx.addToBackStack(null);
+        } else if (id == R.id.nav_dashboard) {
+            FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+            tx.replace(R.id.main,
+                    Fragment.instantiate(MainActivity.this, "id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.Dashboard"));
+            tx.addToBackStack(null);
+            tx.commit();
+            //   tx.addToBackStack(null);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

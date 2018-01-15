@@ -4,9 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +24,7 @@ public class DetailKosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_kos);
 
         Intent iii = getIntent();
-        Bundle bnd = iii.getBundleExtra("detail_kos");
+        final Bundle bnd = iii.getBundleExtra("detail_kos");
 
         byte[] bbb = bnd.getByteArray("detail_gambar");
 
@@ -55,5 +54,20 @@ public class DetailKosActivity extends AppCompatActivity {
                startActivity(callIntent);
             }
         });
+
+        detail_lokasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri gmmIntentUri = Uri.parse("geo:" + bnd.getString("koordinat"));
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(mapIntent);
+                }
+            }
+        });
+
     }
+
+
 }

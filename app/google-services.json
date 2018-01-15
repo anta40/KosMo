@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "741986793374",
+    "firebase_url": "https://kosmo-5684f.firebaseio.com",
+    "project_id": "kosmo-5684f",
+    "storage_bucket": "kosmo-5684f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741986793374:android:b41525e355da379c",
+        "android_client_info": {
+          "package_name": "id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "741986793374-kjhbkokdaesdtepgkdgicimjp5qqil9m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4IKtledQmqkdg_TfQaj0HCp9McSU1htw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
