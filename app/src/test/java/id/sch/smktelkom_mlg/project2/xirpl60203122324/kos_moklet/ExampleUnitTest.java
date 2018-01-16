@@ -2,7 +2,7 @@ package id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

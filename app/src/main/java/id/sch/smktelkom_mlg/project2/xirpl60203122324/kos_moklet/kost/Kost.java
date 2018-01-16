@@ -12,13 +12,16 @@ public class Kost {
     public String lokasi;
     public Drawable foto;
     public String kamar;
+    public String latitute, longitude;
 
-    public Kost(String judul, String deskripsi, String kamar, String lokasi, Drawable foto)
+    public Kost(String judul, String deskripsi, String kamar, String lokasi, String latitude, String longitude, Drawable foto)
     {
         this.judul = judul;
         this.deskripsi = deskripsi;
         this.lokasi = lokasi;
         this.kamar = kamar;
+        this.latitute = latitude;
+        this.longitude = longitude;
         this.foto = foto;
     }
 }

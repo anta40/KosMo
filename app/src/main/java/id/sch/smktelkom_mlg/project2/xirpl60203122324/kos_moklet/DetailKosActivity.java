@@ -17,6 +17,7 @@ public class DetailKosActivity extends AppCompatActivity {
     TextView detail_deskripsi;
     TextView detail_lokasi;
     TextView detail_kamar;
+    String nama, latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ public class DetailKosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_kos);
 
         Intent iii = getIntent();
-        final Bundle bnd = iii.getBundleExtra("detail_kos");
+        Bundle bnd = iii.getBundleExtra("detail_kos");
 
         byte[] bbb = bnd.getByteArray("detail_gambar");
 
@@ -33,6 +34,10 @@ public class DetailKosActivity extends AppCompatActivity {
         detail_deskripsi = (TextView) findViewById(R.id.detail_deskripsi);
         detail_lokasi = (TextView) findViewById(R.id.detail_lokasi);
         detail_kamar = (TextView) findViewById(R.id.detail_kamar);
+
+        nama = bnd.getString("detail_nama");
+        latitude = bnd.getString("detail_latitude");
+        longitude = bnd.getString("detail_longitude");
 
         detail_nama.setText(bnd.getString("detail_nama"));
         detail_deskripsi.setText("No telp: "+bnd.getString("detail_deskripsi"));
@@ -58,16 +63,15 @@ public class DetailKosActivity extends AppCompatActivity {
         detail_lokasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri gmmIntentUri = Uri.parse("geo:" + bnd.getString("koordinat"));
+                String myUri = "geo:<" + latitude + ">,<" + longitude + ">?q=<" + latitude + ">,<" + longitude + ">(" + nama + ")";
+                Uri gmmIntentUri = Uri.parse(myUri);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 if (mapIntent.resolveActivity(getPackageManager()) != null) {
                     startActivity(mapIntent);
                 }
+
             }
         });
-
     }
-
-
 }

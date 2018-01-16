@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,12 +32,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
             android:paddingBottom="20dp"
-            android:paddingRight="40dp"
             android:paddingLeft="40dp"
-            android:textAlignment="center"
+            android:paddingRight="40dp"
+            android:paddingTop="10dp"
             android:text="Aplikasi ini dibuat untuk siswa maupun calon siswa untuk memudahkan mencari informasi kos di sekitar lokasi sekolah"
+            android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 
@@ -112,10 +110,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
             android:paddingBottom="20dp"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
+            android:paddingTop="10dp"
             android:text="Thanks to Allah SWT || Parents || Team || Bapak Hendra Wahyu Prasetya || ASUS || Google || Youtube || StackOverFlow || Android Studio"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small" />

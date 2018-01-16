@@ -16,10 +16,10 @@ public class ImageAdapter extends PagerAdapter {
 
     Context context;
     private int[] GalImages = new int[] {
-            R.drawable.anin,
-            R.drawable.tum,
-            R.drawable.gazka,
-            R.drawable.tam,
+            R.drawable.d1,
+            R.drawable.d2,
+            R.drawable.d3,
+            R.drawable.d4,
     };
     public ImageAdapter(Context context){
         this.context = context;

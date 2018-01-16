@@ -3,16 +3,12 @@ package id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
@@ -67,6 +63,8 @@ public class kos_putri extends Fragment {
                 bnd.putString("detail_deskripsi", k.deskripsi);
                 bnd.putString("detail_lokasi", k.lokasi);
                 bnd.putString("detail_kamar", k.kamar);
+                bnd.putString("detail_latitude", k.latitute);
+                bnd.putString("detail_longitude", k.longitude);
                 byte[] bbb = convertDrawtableToByteArray(k.foto);
                 bnd.putByteArray("detail_gambar", bbb);
 
@@ -102,11 +100,13 @@ public class kos_putri extends Fragment {
                     String nama = data.child("nama").getValue().toString();
                     String kamar = data.child("jumlah_kamar").getValue().toString();
                     String gambar = data.child("gambar").getValue().toString();
+                    String latitude = data.child("latitude").getValue().toString().trim();
+                    String longitude = data.child("longitude").getValue().toString().trim();
                     byte[] bbb = Base64.decode(gambar, Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(bbb, 0, bbb.length);
                     Drawable d = new BitmapDrawable(getContext().getResources(), decodedByte);
                     arFoto[x] = d;
-                    mList.add(new Kost(nama, deskripsi, kamar, lokasi, arFoto[x]));
+                    mList.add(new Kost(nama, deskripsi, kamar, lokasi, latitude, longitude, arFoto[x]));
                     ++x;
                 }
 

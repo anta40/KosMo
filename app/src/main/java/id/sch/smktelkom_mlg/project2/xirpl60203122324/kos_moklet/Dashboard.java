@@ -1,9 +1,7 @@
 package id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -14,9 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.adapter.ImageAdapter;
-import me.relex.circleindicator.CircleIndicator;
 
 public class Dashboard extends Fragment {
 

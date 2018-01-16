@@ -18,8 +18,8 @@ import id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet.kost.Kost;
 
 public class KostAdapter extends RecyclerView.Adapter<KostAdapter.ViewHolder> {
 
-    ArrayList<Kost> kostList;
     static ClickListener clickListener;
+    ArrayList<Kost> kostList;
 
     public KostAdapter(ArrayList<Kost> kostList)
     {
