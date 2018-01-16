@@ -63,8 +63,8 @@ public class DetailKosActivity extends AppCompatActivity {
         detail_lokasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String myUri = "geo:<" + latitude + ">,<" + longitude + ">?q=<" + latitude + ">,<" + longitude + ">(" + nama + ")";
-                Uri gmmIntentUri = Uri.parse(myUri);
+                String myMapUri = "geo:<" + latitude + ">,<" + longitude + ">?q=<" + latitude + ">,<" + longitude + ">(" + nama + ")";
+                Uri gmmIntentUri = Uri.parse(myMapUri);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 if (mapIntent.resolveActivity(getPackageManager()) != null) {
