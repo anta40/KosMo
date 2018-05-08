@@ -1,6 +1,8 @@
 package id.sch.smktelkom_mlg.project2.xirpl60203122324.kos_moklet;
 
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -11,8 +13,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Base64;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -37,6 +42,7 @@ public class kos_putra extends Fragment {
 
     ArrayList<Kost> mList = new ArrayList<>();
     KostAdapter mAdapter;
+    SearchView searchView;
 
     public kos_putra() {
         // Required empty public constructor
@@ -48,8 +54,7 @@ public class kos_putra extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.kos_putra, container, false);
-
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new KostAdapter(mList);
@@ -57,7 +62,8 @@ public class kos_putra extends Fragment {
         mAdapter.setOnItemClickListener(new ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Kost k = mList.get(position);
+                //Kost k = mList.get(position);
+                Kost k = mAdapter.getFilteredList().get(position);
                 Bundle bnd = new Bundle();
                 bnd.putString("detail_nama", k.judul);
                 bnd.putString("detail_deskripsi", k.deskripsi);
@@ -79,8 +85,23 @@ public class kos_putra extends Fragment {
             }
         });
 
-        recyclerView.setAdapter(mAdapter);
+        searchView = (SearchView) view.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mAdapter.getFilter().filter(query);
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String query) {
+                mAdapter.getFilter().filter(query);
+                return false;
+            }
+        });
+
+        mAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(mAdapter);
         getDataFromFirebase();
         return view;
     }

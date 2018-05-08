@@ -18,6 +18,7 @@ public class DetailKosActivity extends AppCompatActivity {
     TextView detail_lokasi;
     TextView detail_kamar;
     String nama, latitude, longitude;
+    ImageView imgPhone, imgMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,35 @@ public class DetailKosActivity extends AppCompatActivity {
         detail_lokasi = (TextView) findViewById(R.id.detail_lokasi);
         detail_kamar = (TextView) findViewById(R.id.detail_kamar);
 
+        imgMap = (ImageView) findViewById(R.id.img_map);
+        imgPhone = (ImageView) findViewById(R.id.img_phone);
+
+        imgMap.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                String myUri = "geo:<" + latitude + ">,<" + longitude + ">?q=<" + latitude + ">,<" + longitude + ">(" + nama + ")";
+                Uri gmmIntentUri = Uri.parse(myUri);
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(mapIntent);
+                }
+            }
+        });
+
+        imgPhone.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                String input = detail_deskripsi.getText().toString();
+                input = input.replace("No telp: ","");
+
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:"+Uri.encode(input.trim())));
+                callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(callIntent);
+            }
+        });
+
         nama = bnd.getString("detail_nama");
         latitude = bnd.getString("detail_latitude");
         longitude = bnd.getString("detail_longitude");
@@ -46,32 +76,5 @@ public class DetailKosActivity extends AppCompatActivity {
 
         Bitmap bm = BitmapFactory.decodeByteArray(bbb, 0, bbb.length);
         detail_gambar.setImageBitmap(bm);
-
-        detail_deskripsi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               String input = detail_deskripsi.getText().toString();
-               input = input.replace("No telp: ","");
-
-               Intent callIntent = new Intent(Intent.ACTION_DIAL);
-               callIntent.setData(Uri.parse("tel:"+Uri.encode(input.trim())));
-               callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-               startActivity(callIntent);
-            }
-        });
-
-        detail_lokasi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String myUri = "geo:<" + latitude + ">,<" + longitude + ">?q=<" + latitude + ">,<" + longitude + ">(" + nama + ")";
-                Uri gmmIntentUri = Uri.parse(myUri);
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                if (mapIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(mapIntent);
-                }
-
-            }
-        });
     }
 }

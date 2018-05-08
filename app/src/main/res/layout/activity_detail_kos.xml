@@ -12,7 +12,7 @@
         android:layout_margin="5dip"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-         />
+        />
 
     <TextView
         android:id="@+id/detail_nama"
@@ -22,14 +22,30 @@
         android:paddingTop="10px"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-    <TextView
-        android:id="@+id/detail_deskripsi"
-        android:layout_width="match_parent"
+
+    <RelativeLayout
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:gravity="center"
-        android:paddingTop="10px"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:layout_width="fill_parent"
+        >
+        <ImageView
+            android:id="@+id/img_phone"
+            android:src="@drawable/ic_call_black_24dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"></ImageView>
+
+        <TextView
+            android:id="@+id/detail_deskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/img_phone"
+            android:clickable="true"
+            android:gravity="center"
+            android:paddingTop="10px"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    </RelativeLayout>
+
+
 
     <TextView
         android:id="@+id/detail_kamar"
@@ -40,15 +56,25 @@
         android:paddingTop="10px"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-    <TextView
-        android:id="@+id/detail_lokasi"
-        android:layout_width="match_parent"
+    <RelativeLayout
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:gravity="center"
-        android:paddingTop="10px"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:layout_width="fill_parent"
+        >
+        <ImageView
+            android:id="@+id/img_map"
+            android:src="@drawable/ic_map_black_24dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"></ImageView>
 
+        <TextView
+            android:id="@+id/detail_lokasi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/img_map"
+            android:clickable="true"
+            android:gravity="center"
+            android:paddingTop="10px"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-
+    </RelativeLayout>
 </LinearLayout>

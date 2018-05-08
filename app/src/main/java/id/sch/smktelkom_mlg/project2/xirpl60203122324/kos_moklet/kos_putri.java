@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,7 @@ public class kos_putri extends Fragment {
 
     ArrayList<Kost> mList = new ArrayList<>();
     KostAdapter mAdapter;
+    SearchView searchView;
 
     public kos_putri() {
         // Required empty public constructor
@@ -57,7 +59,8 @@ public class kos_putri extends Fragment {
         mAdapter.setOnItemClickListener(new ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Kost k = mList.get(position);
+                //Kost k = mList.get(position);
+                Kost k = mAdapter.getFilteredList().get(position);
                 Bundle bnd = new Bundle();
                 bnd.putString("detail_nama", k.judul);
                 bnd.putString("detail_deskripsi", k.deskripsi);
@@ -76,6 +79,21 @@ public class kos_putri extends Fragment {
 
             @Override
             public void onItemLongClick(int position, View v) {
+            }
+        });
+
+        searchView = (SearchView) view.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                mAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                mAdapter.getFilter().filter(query);
+                return false;
             }
         });
 
